@@ -46,7 +46,7 @@ end)
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
-local Window = Library:NewWindow("Just script v1")
+local Window = Library:NewWindow("Just script v1.1")
 
 local Section = Window:NewSection("Полезные скрипты")
 
