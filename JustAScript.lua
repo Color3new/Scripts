@@ -215,6 +215,45 @@ end
 end
 end)
 
+local Section = Window:NewSection("Изменения в игроке") 
+
+Section:CreateToggle("Ноуклип", function(state) 
+
+local noclipConnection = nil
+
+    local Name = game.Players.LocalPlayer.Name
+
+    if state then
+        if not noclipConnection then
+            noclipConnection = game:GetService('RunService').Stepped:Connect(function()
+                for _, b in pairs(game.Workspace:GetChildren()) do
+                    if b.Name == Name then
+                        for _, v in pairs(b:GetChildren()) do
+                            if v:IsA("BasePart") then
+                                v.CanCollide = false
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    else
+        if noclipConnection then
+            noclipConnection:Disconnect()
+            noclipConnection = nil
+        end
+        for _, b in pairs(game.Workspace:GetChildren()) do
+            if b.Name == Name then
+                for _, v in pairs(b:GetChildren()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = true
+                    end
+                end
+            end
+        end
+    end
+end)
+
 for i, v in pairs(game:GetDescendants()) do
 if v.Name == "__FUNCTION" then
 StarterGui:SetCore("SendNotification", {
