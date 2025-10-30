@@ -92,10 +92,6 @@ Duration = 5,
 end
 end)
 
-Section:CreateButton("Ремоут браузер v3 (бета)", function()
-loadstring(Game:HttpGet("https://raw.githubusercontent.com/Games1799/Scripts/refs/heads/main/RemoteBrowserV3_Beta"))()
-end)
-
 local Section = Window:NewSection("Перемещение")
 
 Section:CreateToggle("Телепорт мышкой", function(state)
