@@ -46,7 +46,7 @@ end)
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
-local Window = Library:NewWindow("Just script v1.1")
+local Window = Library:NewWindow("Just A Script v1.2")
 
 local Section = Window:NewSection("Полезные скрипты")
 
@@ -212,6 +212,20 @@ end
 end)
 
 local Section = Window:NewSection("Изменения в игроке") 
+
+local speed1 = 16
+
+Section:CreateTextbox("Значение скорости", function(txt)
+    speed1 = tonumber(txt)
+end)
+
+Section:CreateToggle("Скорость игрока", function(state)
+    if state then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed1
+    else
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    end
+end)
 
 for i, v in pairs(game:GetDescendants()) do
 if v.Name == "__FUNCTION" then
