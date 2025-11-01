@@ -46,7 +46,7 @@ end)
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
-local Window = Library:NewWindow("Just A Script v1.2")
+local Window = Library:NewWindow("Just A Script v1.3")
 
 local Section = Window:NewSection("Полезные скрипты")
 
@@ -225,6 +225,138 @@ Section:CreateToggle("Скорость игрока", function(state)
     else
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
     end
+end)
+
+local Section = Window:NewSection("Есп") 
+
+local colors = {
+    ["Белый"] = Color3.new(1, 1, 1),
+    ["Чёрный"] = Color3.new(0, 0, 0),
+    ["Красный"] = Color3.new(1, 0, 0),
+    ["Зелёный"] = Color3.new(0, 1, 0),
+    ["Синий"] = Color3.new(0, 0, 1),
+    ["Жёлтый"] = Color3.new(1, 1, 0),
+    ["Голубой"] = Color3.new(0, 1, 1),
+    ["Пурпурный"] = Color3.new(1, 0, 1)
+}
+
+local selectedColor = Color3.new(1, 1, 1)
+Section:CreateDropdown("Выбрать цвет еспа", {"Белый", "Чёрный", "Красный", "Зелёный", "Синий", "Жёлтый", "Голубой", "Пурпурный"}, 1, function(text)
+    selectedColor = colors[text]
+end)
+
+Section:CreateToggle("Есп", function(state)
+    if state then
+getgenv().enabled = true
+getgenv().filluseteamcolor = false
+getgenv().outlineuseteamcolor = false
+getgenv().fillcolor = selectedColor
+getgenv().outlinecolor = selectedColor
+getgenv().filltrans = 0
+getgenv().outlinetrans = 0
+ 
+local holder = game.CoreGui:FindFirstChild("ESPHolder") or Instance.new("Folder")
+if enabled == false then
+    holder:Destroy()
+end
+
+if holder.Name == "Folder" then
+    holder.Name = "ESPHolder"
+    holder.Parent = game.CoreGui
+end
+
+if uselocalplayer == false and holder:FindFirstChild(game.Players.LocalPlayer.Name) then
+    holder:FindFirstChild(game.Players.LocalPlayer.Name):Destroy()
+end
+
+if getgenv().enabled == true then 
+    getgenv().enabled = false
+    getgenv().enabled = true
+end
+while getgenv().enabled do
+    task.wait()
+    for _,v in pairs(game.Players:GetChildren()) do
+        local chr = v.Character
+        if chr ~= nil then
+        local esp = holder:FindFirstChild(v.Name) or Instance.new("Highlight")
+        esp.Name = v.Name
+        if uselocalplayer == false and esp.Name == game.Players.LocalPlayer.Name then
+            else
+        esp.Parent = holder
+        if filluseteamcolor then
+            esp.FillColor = v.TeamColor.Color
+        else
+            esp.FillColor = fillcolor 
+        end
+        if outlineuseteamcolor then
+            esp.OutlineColor = v.TeamColor.Color
+        else
+            esp.OutlineColor = outlinecolor    
+        end
+        esp.FillTransparency = filltrans
+        esp.OutlineTransparency = outlinetrans
+        esp.Adornee = chr
+        esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        end
+        end
+    end
+end
+else
+getgenv().enabled = false
+getgenv().filluseteamcolor = false
+getgenv().outlineuseteamcolor = false
+getgenv().fillcolor = selectedColor
+getgenv().outlinecolor = selectedColor
+getgenv().filltrans = 0
+getgenv().outlinetrans = 0
+ 
+local holder = game.CoreGui:FindFirstChild("ESPHolder") or Instance.new("Folder")
+if enabled == false then
+    holder:Destroy()
+end
+
+if holder.Name == "Folder" then
+    holder.Name = "ESPHolder"
+    holder.Parent = game.CoreGui
+end
+
+if uselocalplayer == false and holder:FindFirstChild(game.Players.LocalPlayer.Name) then
+    holder:FindFirstChild(game.Players.LocalPlayer.Name):Destroy()
+end
+
+if getgenv().enabled == true then 
+    getgenv().enabled = false
+    getgenv().enabled = true
+end
+while getgenv().enabled do
+    task.wait()
+    for _,v in pairs(game.Players:GetChildren()) do
+        local chr = v.Character
+        if chr ~= nil then
+        local esp = holder:FindFirstChild(v.Name) or Instance.new("Highlight")
+        esp.Name = v.Name
+        if uselocalplayer == false and esp.Name == game.Players.LocalPlayer.Name then
+            else
+        esp.Parent = holder
+        if filluseteamcolor then
+            esp.FillColor = v.TeamColor.Color
+        else
+            esp.FillColor = fillcolor 
+        end
+        if outlineuseteamcolor then
+            esp.OutlineColor = v.TeamColor.Color
+        else
+            esp.OutlineColor = outlinecolor    
+        end
+        esp.FillTransparency = filltrans
+        esp.OutlineTransparency = outlinetrans
+        esp.Adornee = chr
+        esp.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        end
+        end
+    end
+end
+end 
 end)
 
 for i, v in pairs(game:GetDescendants()) do
