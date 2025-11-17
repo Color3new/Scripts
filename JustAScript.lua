@@ -227,8 +227,11 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
     end
 end)
 
-local Section = Window:NewSection("Есп") 
+Section:CreateButton("Флай", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+end) 
 
+local Section = Window:NewSection("Есп") Section:
 local colors = {
     ["Белый"] = Color3.new(1, 1, 1),
     ["Чёрный"] = Color3.new(0, 0, 0),
